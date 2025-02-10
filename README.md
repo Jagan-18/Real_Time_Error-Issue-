@@ -1,9 +1,8 @@
-#1 The error message **"No space left on device"** typically occurs when the disk of your EC2 instance runs out of available space. When the disk space is completely used up, the system cannot perform operations like writing data to the disk, which results in this error.
 
-In Amazon EC2 instances, the disk is typically provided by Elastic Block Store (EBS) volumes, and if the storage space on your EBS volume is exhausted, you'll face this issue. Increasing the size of your volume and extending the file system can resolve this issue.
-
----
-
+# 1 The error message **"No space left on device"** typically occurs when the disk of your EC2 instance runs out of available space.
+  - When the disk space is completely used up, the system cannot perform operations like writing data to the disk, which results in this error.
+  - In Amazon EC2 instances, the disk is typically provided by Elastic Block Store (EBS) volumes, and if the storage space on your EBS volume is exhausted, you'll face this issue.
+  -  Increasing the size of your volume and extending the file system can resolve this issue.
 ### Steps to Resolve the "No Space Left on Device" Issue
 
 #### Step 1: Check Disk Usage
@@ -75,74 +74,8 @@ Finally, run **`df -h`** again to confirm that the file system has been successf
 ```bash
 df -h
 ```
-
 ---
 
-### Sample `README` Explanation:
 
-```markdown
-# Guide to Fix "No Space Left on Device" Error on EC2
-
-## Error Overview
-The error **"No space left on device"** typically occurs when your EC2 instance's disk space is completely used. This means that there is no free space left for new data to be written to the disk, causing various processes to fail.
-
-## Resolution Steps
-
-### Step 1: Check Disk Usage
-To check disk usage on your EC2 instance, run the following command:
-
-```bash
-df -h
-```
-
-This will display the disk usage statistics for each file system. Look for the file system that shows **100% usage**.
-
-### Step 2: Resize the EBS Volume
-1. **Navigate to AWS Console**:
-   - Open the **EC2 Console** and go to **Volumes** under **Elastic Block Store**.
-   
-2. **Modify the Volume**:
-   - Select the volume attached to your EC2 instance.
-   - Click on **Modify Volume** and increase its size as required.
-   - Confirm the changes.
-
-### Step 3: Resize the Partition and File System
-1. **Verify Volume Resize**:
-   Run the following command to verify the attached block devices:
-
-   ```bash
-   lsblk
-   ```
-
-2. **Install Cloud Guest Utilities**:
-   Install the cloud guest utilities that are required for resizing the file system:
-
-   ```bash
-   sudo apt install cloud-guest-utils
-   ```
-
-3. **Resize the Partition**:
-   Resize the partition to take advantage of the newly available space:
-
-   ```bash
-   sudo growpart /dev/xvda1
-   ```
-
-4. **Resize the File System**:
-   Finally, resize the file system:
-
-   ```bash
-   sudo resize2fs /dev/xvda1
-   ```
-
-### Step 4: Verify the Disk Usage Again
-After resizing, check the disk space again:
-
-```bash
-df -h
-```
-
-You should see the increased space now available for use.
-
----
+  
 
